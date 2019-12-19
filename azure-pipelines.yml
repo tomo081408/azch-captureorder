@@ -6,7 +6,7 @@ variables:
     value: 'containerRegistryConnection' # make sure it matches the name you used in the service connection
   
   - name: acrEndpoint
-    value: 'uniqueacrname.azurecr.io' # replace with container registry endpoint
+    value: '0029371acr.azurecr.io' # replace with container registry endpoint
 
   - name: tag
     value: '$(Build.BuildId)'
@@ -66,7 +66,7 @@ stages:
               secretName: mongodb
               secretType: generic
               namespace: $(k8sNamespace)
-              secretArguments: --from-literal=mongoHost=$(mongoHost) --from-literal=mongoUser=$(mongoUser) --from-literal=mongoPassword=$(mongoPassword)
+              secretArguments: --from-literal=mongoHost=$mongoHost --from-literal=mongoUser=$mongoUser --from-literal=mongoPassword=$Dd029371
 
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
@@ -74,4 +74,4 @@ stages:
               action: deploy
               namespace: $(k8sNamespace)
               manifests: $(System.ArtifactsDirectory)/manifests/*
-              containers: '$(acrEndpoint)/captureorder:$(tag)'
+              containers: '$0029371acr.azurecr.io/captureorder:$(tag)'
